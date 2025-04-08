@@ -53,11 +53,14 @@ if st.sidebar.button("Run Forecast"):
 
             st.success(f"R²: {r2:.4f}, RMSE: {rmse:.2f}, MAPE: {mape:.2f}%")
 
-            st.subheader("📊 Forecast Plot")
-            future_full = model.make_future_dataframe(data, periods=30)
-            forecast_full = model.predict(future_full)
-            fig = model.plot(forecast_full)
-            st.plotly_chart(fig, use_container_width=True)
+            st.subheader("📊 Forecast Components (Trend, Seasonality)")
+future_full = model.make_future_dataframe(data, periods=30)
+forecast_full = model.predict(future_full)
+
+# Plot each component separately
+fig_components = model.plot_components(forecast_full)
+for fig in fig_components:
+    st.plotly_chart(fig, use_container_width=True)
 
             st.subheader("🔍 Forecast Data Preview")
             st.dataframe(forecast_full[['ds', 'yhat1']].tail(30))
