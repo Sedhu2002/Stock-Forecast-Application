@@ -1,7 +1,9 @@
-
 streamlit
 yfinance
-neuralprophet
-scikit-learn
 pandas
+scikit-learn
 plotly
+torch==2.0.1
+neuralprophet==0.5.3
+ipython
+matplotlib
